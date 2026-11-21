@@ -4,7 +4,7 @@ A Cisco Packet Tracer lab simulating a small office network with
 segmented VLANs, DHCP, access control, and internet access via NAT.
 
 ## Topology
-![Topology](screenshots/topology.png)
+![Network Topology](screenshort/Network%20Topology.png)
 
 ## Features
 - 3 VLANs (Staff, Guest, IT) with inter-VLAN routing (router-on-a-stick)
@@ -24,38 +24,35 @@ WAN link: R1 (203.0.113.1/30) to ISP (203.0.113.2/30)
 
 ## Verification
 
-**Interfaces up with correct IPs**
-![Interfaces](screenshots/show-ip-interface-brief.png)
+**Sub-interfaces are up**
+![Sub-interfaces](screenshort/sub-interfaces%20are%20up.png)
 
-**DHCP working on a PC**
-![DHCP](screenshots/dhcp-ipconfig.png)
+**Inter-VLAN routing works: Staff can ping IT**
+![Staff to IT](screenshort/Staff%20pc%20pinging%20IT%20pc%20means%20inter-vlan-routing%20work.png)
 
-**Inter-VLAN routing: Staff can reach IT**
-![Staff to IT](screenshots/staff-to-it-ping.png)
+**ACL works: Guest cannot ping Staff**
+![Guest blocked](screenshort/Guest%20pc%20can%27t%20ping%20Staff%20pc%20mean%20ACL%20work.png)
 
-**ACL working: Guest is blocked from Staff**
-![ACL](screenshots/guest-blocked-acl.png)
+**ACL counters show blocked traffic**
+![ACL counters](screenshort/ACL%20counter%20show%20block%20traffic.png)
 
-**NAT working: Guest can reach the internet**
-![Internet](screenshots/guest-to-internet-nat.png)
+**NAT and routing work: Guest can ping 8.8.8.8**
+![Guest to internet](screenshort/Guest%20can%20ping%208.8.8.8%20mean%20NAT%20and%20routing%20work.png)
 
-**NAT translations table**
-![NAT](screenshots/nat-translations.png)
+**NAT is translating addresses**
+![NAT translations](screenshort/NAT%20is%20translating%20addresses.png)
 
-## Configs
-- [R1](configs/R1.txt)
-- [SW1](configs/SW1.txt)
-- [ISP](configs/ISP.txt)
+## Files
+- [Packet Tracer file](small-office-network.pkt)
+- [R1 config](Configs/R1.txt)
+- [SW1 config](Configs/SW1.txt)
+- [ISP config](Configs/ISP.txt)
 
 ## Tools
 Cisco Packet Tracer, Cisco IOS CLI
 
 ## What I learned
-[Write 2-3 real sentences here. Example: "My trunk between R1 and SW1
-was down at first because I forgot `no shutdown` on the physical
-interface. I also learned that an ACL applied in the wrong direction
-blocks the wrong traffic, so I applied it inbound on the Guest
-subinterface."]
+[Write 2-3 real sentences about a problem you hit and how you fixed it.]
 
 ## Next steps
 - Add OSPF with a branch router
