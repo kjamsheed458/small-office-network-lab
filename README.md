@@ -46,7 +46,7 @@ WAN link: R1 (203.0.113.1/30) to ISP (203.0.113.2/30)
 - [Packet Tracer file](small-office-network.pkt)
 - [R1 config](Configs/Router1.txt)
 - [SW1 config](Configs/SW1.txt)
-- [ISP config](Configs/iSP.txt)
+- [ISP config](Configs/ISP.txt)
 
 ## Tools
 Cisco Packet Tracer, Cisco IOS CLI
