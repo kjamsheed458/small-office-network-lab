@@ -1,0 +1,74 @@
+! ---------- router-on-a-stick ----------
+interface g0/1
+ no ip address
+ no shutdown
+exit
+
+interface g0/1.10
+ description STAFF VLAN
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+ ip nat inside
+exit
+
+interface g0/1.20
+ description GUEST VLAN
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+ ip nat inside
+ ip access-group GUEST-IN in
+exit
+
+interface g0/1.30
+ description IT VLAN
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.0
+ ip nat inside
+exit
+
+! ---------- WAN side ----------
+interface g0/0
+ ip address 203.0.113.1 255.255.255.252
+ ip nat outside
+ no shutdown
+exit
+
+! ---------- DHCP ----------
+ip dhcp excluded-address 192.168.10.1 192.168.10.10
+ip dhcp excluded-address 192.168.20.1 192.168.20.10
+ip dhcp excluded-address 192.168.30.1 192.168.30.10
+
+ip dhcp pool STAFF
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 8.8.8.8
+exit
+
+ip dhcp pool GUEST
+ network 192.168.20.0 255.255.255.0
+ default-router 192.168.20.1
+ dns-server 8.8.8.8
+exit
+
+ip dhcp pool IT
+ network 192.168.30.0 255.255.255.0
+ default-router 192.168.30.1
+ dns-server 8.8.8.8
+exit
+
+! ---------- ACL: guests can reach the internet, not Staff or IT ----------
+ip access-list extended GUEST-IN
+ deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
+ deny ip 192.168.20.0 0.0.0.255 192.168.30.0 0.0.0.255
+ permit ip any any
+exit
+
+! ---------- NAT (PAT) ----------
+access-list 1 permit 192.168.0.0 0.0.255.255
+ip nat inside source list 1 interface g0/0 overload
+
+! ---------- Routing ----------
+ip route 0.0.0.0 0.0.0.0 203.0.113.2
+
+end
+write memory

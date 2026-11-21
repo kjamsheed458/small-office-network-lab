@@ -1,0 +1,17 @@
+vlan 10
+ name STAFF
+vlan 20
+ name GUEST
+vlan 30
+ name IT
+interface f0/1
+ switchport mode trunk
+interface range f0/2-3
+ switchport mode access
+ switchport access vlan 10
+interface range f0/4-5
+ switchport mode access
+ switchport access vlan 20
+interface range f0/6-7
+ switchport mode access
+ switchport access vlan 30
