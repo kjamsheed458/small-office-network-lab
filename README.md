@@ -52,7 +52,7 @@ WAN link: R1 (203.0.113.1/30) to ISP (203.0.113.2/30)
 Cisco Packet Tracer, Cisco IOS CLI
 
 ## What I learned
-[Write 2-3 real sentences about a problem you hit and how you fixed it.]
+This lab put my networking theory into practice. I built the full design, including VLANs, router-on-a-stick, DHCP, an ACL and NAT, and verified each part with show commands and ping tests. I used `show access-lists` to confirm the ACL was blocking Guest traffic, and `show ip nat translations` to confirm NAT worked.
 
 ## Next steps
 - Add OSPF with a branch router
